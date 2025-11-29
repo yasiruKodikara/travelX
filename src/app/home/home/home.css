@@ -1,0 +1,11 @@
+/* Home component styles */
+.hero {
+	background-image: linear-gradient(0deg, rgba(0,0,0,0.45), rgba(0,0,0,0.15)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80');
+	background-size: cover;
+	background-position: center;
+	padding: 80px 0;
+	color: #fff;
+}
+.search-card { background: #fff; border-radius: 12px; }
+.search-card .form-control, .search-card .form-select { height: 48px; }
+.features .border { background: #fff; opacity: 0.95; }
