@@ -1,0 +1,47 @@
+<div class="container py-5">
+  <div class="page-header text-center mb-5">
+    <h1 class="display-4 fw-bold">Vehicle Rentals</h1>
+    <p class="lead text-muted">Choose from our premium fleet of vehicles for your journey</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6" *ngFor="let vehicle of vehicles">
+      <div class="card h-100 vehicle-card shadow-sm">
+        <!-- Image -->
+        <div class="card-img-container overflow-hidden">
+          <img [src]="vehicle.image" alt="{{ vehicle.name }}" class="card-img-top vehicle-img" />
+          <div class="card-overlay">
+            <span class="badge bg-warning">{{ vehicle.price }}</span>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">{{ vehicle.name }}</h5>
+          <p class="card-text text-muted small flex-grow-1">{{ vehicle.description }}</p>
+
+          <!-- Specs -->
+          <div class="vehicle-specs mb-3">
+            <span class="badge bg-light text-dark me-2" *ngFor="let spec of vehicle.specs">
+              {{ spec }}
+            </span>
+          </div>
+
+          <!-- Rating -->
+          <!-- <div class="vehicle-rating mb-3">
+            <span class="stars">★★★★★</span>
+            <span class="text-muted small">(156 reviews)</span>
+          </div> -->
+        </div>
+
+        <!-- Footer with Buttons -->
+        <div class="card-footer bg-white border-top">
+          <div class="d-grid gap-2">
+            <button class="btn btn-warning btn-sm fw-bold text-dark" (click)="bookNow(vehicle)">Book Now</button>
+            <button class="btn btn-outline-warning btn-sm fw-bold" (click)="shopMore(vehicle)">Shop More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

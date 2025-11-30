@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Api } from '../../core/services/api';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-auth',
-  imports: [FormsModule, CommonModule,HttpClientModule],
+  imports: [FormsModule, CommonModule, HttpClientModule, RouterLink],
   templateUrl: './auth.html',
   styleUrl: './auth.css',
   providers:[Api]

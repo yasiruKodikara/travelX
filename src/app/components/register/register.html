@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="auth-header">
       <h2 class="auth-title">Create Account</h2>
-      <p class="auth-subtitle">Join TravelX and start your adventure</p>
+      <p class="auth-subtitle">Join PrimRose and start your adventure</p>
     </div>
 
     <!-- Register: Name + Email + Password -->
@@ -38,7 +38,7 @@
             class="form-control form-control-lg"
             id="phone"
             name="phone"
-            placeholder="+1 (555) 123-4567"
+            placeholder="+94712345678"
             [(ngModel)]="phone"
             required
             pattern="[0-9\s\-\+\(\)]{10,15}"
@@ -100,7 +100,7 @@
 
         <!-- Sign In Link -->
         <p class="auth-footer-text">
-          Already have an account? <a href="/signin" class="text-primary fw-bold">Sign in</a>
+          Already have an account? <a [routerLink]="['/auth']" class="text-primary fw-bold">Sign in</a>
         </p>
       </form>
     </div>

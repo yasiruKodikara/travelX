@@ -2,7 +2,7 @@
   <div class="auth-card">
     <!-- Header -->
     <div class="auth-header">
-      <h2 class="auth-title">Welcome to TravelX</h2>
+      <h2 class="auth-title">Welcome to PrimRose</h2>
       <p class="auth-subtitle">Sign in to continue your journey</p>
     </div>
 
@@ -16,7 +16,7 @@
             class="form-control form-control-lg"
             id="phoneNumber"
             name="phoneNumber"
-            placeholder="+94 712 345 678"
+            placeholder="+94712345678"
             [(ngModel)]="phoneNumber"
             maxlength="12"
             required
@@ -59,7 +59,7 @@
         </button>
 
         <p class="auth-footer-text">
-          New to TravelX? <a href="/register" class="text-primary fw-bold">Create an account</a>
+          New to PrimRose? <a [routerLink]="['/register']" class="text-primary fw-bold">Create an account</a>
         </p>
       </form>
     </div>
@@ -68,8 +68,3 @@
   <!-- Background decoration -->
   <div class="auth-decoration"></div>
 </div>
- id (PK)       
- name         
- email         
- password_hash 
- role          

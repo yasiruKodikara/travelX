@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 import { Api } from '../../core/services/api';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, CommonModule,NgIf,HttpClientModule],
+  imports: [FormsModule, CommonModule, NgIf, HttpClientModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
   providers: [Api]
