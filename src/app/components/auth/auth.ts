@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Api } from '../../core/services/api';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-auth',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,HttpClientModule],
   templateUrl: './auth.html',
   styleUrl: './auth.css',
+  providers:[Api]
 })
 export class Auth {
   phoneNumber: string = '';
   password: string = '';
   isSubmitted: boolean = false;
+
+  constructor(private api:Api){}
 
   // Submit login with phone and password
   submitLogin() {
@@ -19,7 +24,10 @@ export class Auth {
     if (this.isValidPhone(this.phoneNumber) && this.isValidPassword(this.password)) {
       console.log('Logging in with:', this.phoneNumber);
       // TODO: Call API to authenticate
-      alert('Login successful!');
+      this.api.login({phone:this.phoneNumber, password:this.password}).subscribe((res:any)=>{
+          console.log(res.message);
+        }
+      );
     }
   }
 
