@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Api } from '../../../core/services/api';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 interface Room {
   id: number;
@@ -15,49 +17,15 @@ interface Room {
 @Component({
   selector: 'app-room-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,HttpClientModule],
   templateUrl: './room-management.html',
-  styleUrls: ['./room-management.css']
+  styleUrls: ['./room-management.css'],
+  providers:[Api]
 })
 export class RoomManagementComponent {
-  rooms: Room[] = [
-    {
-      id: 1,
-      room_number: '101',
-      type: 'Single',
-      price_per_night: 80,
-      capacity: 1,
-      imageUrl: 'https://images.unsplash.com/photo-1631049307038-da31bc36033b?w=400',
-      status: 'available'
-    },
-    {
-      id: 2,
-      room_number: '102',
-      type: 'Double',
-      price_per_night: 120,
-      capacity: 2,
-      imageUrl: 'https://images.unsplash.com/photo-1631049307038-da31bc36033b?w=400',
-      status: 'available'
-    },
-    {
-      id: 3,
-      room_number: '103',
-      type: 'Suite',
-      price_per_night: 200,
-      capacity: 4,
-      imageUrl: 'https://images.unsplash.com/photo-1631049307038-da31bc36033b?w=400',
-      status: 'unavailable'
-    },
-    {
-      id: 4,
-      room_number: '104',
-      type: 'Double',
-      price_per_night: 120,
-      capacity: 2,
-      imageUrl: 'https://images.unsplash.com/photo-1631049307038-da31bc36033b?w=400',
-      status: 'available'
-    }
-  ];
+
+  constructor(private api:Api){}
+  rooms: Room[] = [];
 
   newRoom: Room = {
     id: 0,
@@ -87,7 +55,11 @@ export class RoomManagementComponent {
       }
     } else {
       const newId = this.rooms.length > 0 ? Math.max(...this.rooms.map(r => r.id)) + 1 : 1;
-      this.rooms.push({ ...this.newRoom, id: newId });
+      this.api.addRoom(this.newRoom).subscribe((res:any)=>{
+        alert(res.message[0]);
+        
+      });
+
     }
 
     this.resetForm(form);
@@ -101,7 +73,10 @@ export class RoomManagementComponent {
   }
 
   deleteRoom(id: number) {
-    this.rooms = this.rooms.filter(r => r.id !== id);
+    this.api.deleteRoom(id).subscribe((res:any)=>{
+      alert(res.message[0]);
+      this.rooms = this.rooms.filter(r => r.id !== id);
+    });
   }
 
   resetForm(form: NgForm) {
@@ -125,4 +100,11 @@ export class RoomManagementComponent {
     this.editingId = null;
     this.isSubmitted = false;
   }
+
+  ngOnInit() {
+    this.api.getRooms().subscribe((data:any)=>{
+      this.rooms=data;
+    });
+  }
+
 }

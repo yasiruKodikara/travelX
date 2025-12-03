@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Api } from '../../core/services/api';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +17,7 @@ export class Auth {
   password: string = '';
   isSubmitted: boolean = false;
 
-  constructor(private api:Api){}
+  constructor(private api:Api, private router: Router){}
 
   // Submit login with phone and password
   submitLogin() {
@@ -27,7 +27,8 @@ export class Auth {
       // TODO: Call API to authenticate
       this.api.login({phone:this.phoneNumber, password:this.password}).subscribe((res:any)=>{
         localStorage.setItem('token', res.token);
-          console.log(res.message);
+          alert(res.message);
+          this.router.navigate(['/my-account']);
         }
       );
     }

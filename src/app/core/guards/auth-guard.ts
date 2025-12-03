@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate{
   canActivate():boolean {
     if (this.auth.getToken()) return true;
     alert('You are not authorized to access this page');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
     return false;
 }
 }
