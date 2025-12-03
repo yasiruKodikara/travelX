@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Api } from '../../../core/services/api';
 
 interface Safari {
   id: number;
@@ -20,44 +21,8 @@ interface Safari {
   styleUrls: ['./safari-management.css']
 })
 export class SafariManagementComponent {
-  safaris: Safari[] = [
-    {
-      id: 1,
-      name: 'Wildlife Safari',
-      price_per_trip: 150,
-      max_passengers: 6,
-      driver_included: true,
-      imageUrl: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400',
-      status: 'available'
-    },
-    {
-      id: 2,
-      name: 'Morning Game Drive',
-      price_per_trip: 100,
-      max_passengers: 4,
-      driver_included: true,
-      imageUrl: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400',
-      status: 'available'
-    },
-    {
-      id: 3,
-      name: 'Sunset Safari',
-      price_per_trip: 120,
-      max_passengers: 6,
-      driver_included: true,
-      imageUrl: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400',
-      status: 'unavailable'
-    },
-    {
-      id: 4,
-      name: 'Photography Safari',
-      price_per_trip: 200,
-      max_passengers: 3,
-      driver_included: true,
-      imageUrl: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400',
-      status: 'available'
-    }
-  ];
+  constructor(private api: Api) {}
+  safaris: Safari[] = [];
 
   newSafari: Safari = {
     id: 0,
@@ -88,6 +53,10 @@ export class SafariManagementComponent {
     } else {
       const newId = this.safaris.length > 0 ? Math.max(...this.safaris.map(s => s.id)) + 1 : 1;
       this.safaris.push({ ...this.newSafari, id: newId });
+      this.api.addSafariJeep(this.newSafari).subscribe((res:any)=>{
+        alert(res.message);
+        
+      });
     }
 
     this.resetForm(form);

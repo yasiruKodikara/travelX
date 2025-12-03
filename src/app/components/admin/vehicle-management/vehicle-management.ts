@@ -1,35 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Api } from '../../../core/services/api';
+import { Vehicle } from '../../../models/vehicle';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-vehicle-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,HttpClientModule],
   templateUrl: './vehicle-management.html',
   styleUrls: ['./vehicle-management.css'],
+  providers:[Api]
 })
 export class VehicleManagement {
-  vehicles = [
-    {
-      id: 1,
-      model: 'Toyota Land Cruiser',
-      type: 'SUV',
-      price_per_day: 79,
-      imageUrl: 'https://via.placeholder.com/150',
-      status: 'available'
-    },
-    {
-      id: 2,
-      model: 'Safari Jeep',
-      type: 'Jeep',
-      price_per_day: 59,
-      imageUrl: 'https://via.placeholder.com/150',
-      status: 'available'
-    }
-  ];
+  constructor(private api: Api) {}
+  vehicles: Vehicle[] = [];
 
-  newVehicle: { model: string; type: string; price_per_day: number; imageUrl: string; status: string } = {
+  newVehicle: Vehicle = {
     model: '',
     type: 'SUV',
     price_per_day: 0,
@@ -53,21 +41,25 @@ export class VehicleManagement {
         this.editingId = null;
       } else {
         // Add new vehicle
-        this.vehicles.push({ id: Date.now(), ...this.newVehicle });
+        
+        this.api.addVehicle(this.newVehicle).subscribe((res:any)=>{
+          alert(res.message); 
+        });
       }
       this.resetForm(form);
       this.showForm = false;
     }
   }
 
-  editVehicle(vehicle: any) {
-    this.editingId = vehicle.id;
+  editVehicle(vehicle: Vehicle) {
+    this.editingId = vehicle.id ?? null;
     this.newVehicle = { ...vehicle };
     this.showForm = true;
     this.isSubmitted = false;
   }
 
-  deleteVehicle(id: number) {
+  deleteVehicle(id?: number) {
+    if (id == null) return;
     this.vehicles = this.vehicles.filter(v => v.id !== id);
   }
 
@@ -80,5 +72,11 @@ export class VehicleManagement {
   cancelForm() {
     this.showForm = false;
     this.editingId = null;
+  }
+
+  ngOnInit() {
+    this.api.getVehicles().subscribe((res:any)=>{
+      this.vehicles = res;
+    })
   }
 }
