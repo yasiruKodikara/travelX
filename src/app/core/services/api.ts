@@ -44,6 +44,10 @@ export class Api {
     const headers = this.tokenHeaders.getHeaders();
     return this.http.delete(`${this.baseUrl}/delete-room/${roomId}`, {headers});
   }
-  
+  //update room status
+  updateRoomStatus(roomId:number, status:string):Observable<any>{
+    const headers = this.tokenHeaders.getHeaders();
+    return this.http.put(`${this.baseUrl}/update-room-status/${roomId}`, {status}, {headers});
+  }
   
 }

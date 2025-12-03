@@ -45,7 +45,7 @@
           <label class="form-label">Status</label>
           <select name="status" class="form-control" [(ngModel)]="newRoom.status" required #statusField="ngModel" [class.is-invalid]="isSubmitted && statusField.invalid">
             <option value="available">Available</option>
-            <option value="unavailable">Unavailable</option>
+            <option value="booked">booked</option>
           </select>
           <div class="invalid-feedback d-block" *ngIf="isSubmitted && statusField.invalid">Status is required</div>
         </div>

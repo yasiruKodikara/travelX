@@ -52,6 +52,10 @@ export class RoomManagementComponent {
       const index = this.rooms.findIndex(r => r.id === this.editingId);
       if (index !== -1) {
         this.rooms[index] = { ...this.newRoom, id: this.editingId };
+        this.api.updateRoomStatus(this.newRoom.id, this.newRoom.status).subscribe((res:any)=>{
+          alert(res.message);
+          
+        });
       }
     } else {
       const newId = this.rooms.length > 0 ? Math.max(...this.rooms.map(r => r.id)) + 1 : 1;
