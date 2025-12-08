@@ -19,6 +19,7 @@ export class Rooms {
   isBooked: boolean = false;
   constructor(private api:Api,private tokenStore:TokenStorage){}
   rooms:any[] = [];
+  
 
   // Booking state
   selectedRoom: any = null;
@@ -38,8 +39,21 @@ export class Rooms {
     this.isBookingSubmitted = true;
     if (form.valid) {
       const user_id = this.tokenStore.getUserId();
+      const bookingData = {
+        user_id: user_id,
+        room_id: this.selectedRoom.id,
+        start_date: this.booking.start_date,
+        end_date: this.booking.end_date,
+        quantity: this.booking.quantity
+      };
 
-      
+      this.api.bookRoom(bookingData).subscribe(response => {
+        console.log('Booking successful:', response);
+        this.isBooked = true;
+      }, error => {
+        console.error('Booking failed:', error);
+      });
+
       // close modal
       const modalEl = document.getElementById('bookingModal');
       if (modalEl) {

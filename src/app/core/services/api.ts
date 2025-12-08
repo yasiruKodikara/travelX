@@ -92,4 +92,10 @@ export class Api {
     const headers = this.tokenHeaders.getHeaders();
     return this.http.put(`${this.baseUrl}/update-safari-jeep-status/${safariId}`, {status}, {headers});
   }
+
+  //roomBooking
+  bookRoom(bookingData:any):Observable<any>{
+    const headers = this.tokenHeaders.getHeaders();
+    return this.http.post(`${this.baseUrl}/book-room`, bookingData, {headers});
+  }
 }
