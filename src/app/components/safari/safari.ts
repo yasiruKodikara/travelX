@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Api } from '../../core/services/api';
+import { HttpClientModule } from '@angular/common/http';
 
 declare const bootstrap: any;
 
 @Component({
   selector: 'app-safari',
   standalone: true,
-  imports: [CommonModule, NgFor, FormsModule],
+  imports: [CommonModule, NgFor, FormsModule,HttpClientModule],
   templateUrl: './safari.html',
   styleUrl: './safari.css',
+  providers:[Api]
 })
 export class Safari {
+  constructor(private api:Api){
+
+  }
   safaris = [
     {
       id: 1,
@@ -124,5 +130,12 @@ export class Safari {
     const price = this.parsePrice(this.selectedSafari.price);
     const qty = this.booking.quantity || 1;
     return price * days * qty;
+  }
+
+  ngOnInit(){
+    this.api.getSafariJeeps().subscribe((data: any) => {
+      console.log('Fetched rooms:', data);
+      this.safaris=data;
+    });
   }
 }
