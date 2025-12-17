@@ -12,7 +12,7 @@
 	transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 .sign{
-	background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+	background: linear-gradient(135deg, #22c55e 0%, #04ff00 100%);
 	color:white;
 	
 }

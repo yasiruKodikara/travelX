@@ -98,4 +98,10 @@ export class Api {
     const headers = this.tokenHeaders.getHeaders();
     return this.http.post(`${this.baseUrl}/book-room`, bookingData, {headers});
   }
+
+  //safariBooking
+  bookSafari(bookingData:any):Observable<any>{
+    const headers = this.tokenHeaders.getHeaders();
+    return this.http.post(`${this.baseUrl}/book-safari-jeep`, bookingData, {headers});
+  }
 }
