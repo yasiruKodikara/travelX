@@ -95,6 +95,9 @@ export class Safari {
       const modalEl = document.getElementById('safariBookingModal');
       if (modalEl) {
         const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        this.api.bookSafari(this.booking).subscribe((res:any)=>{
+          console.log(res.message);
+        })
         modal.hide();
       }
     }
