@@ -9,23 +9,25 @@
       <div class="card h-100 vehicle-card shadow-sm">
         <!-- Image -->
         <div class="card-img-container overflow-hidden">
-          <img [src]="vehicle.image" alt="{{ vehicle.name }}" class="card-img-top vehicle-img" />
+          <img [src]="vehicle.imageUrl" alt="{{ vehicle.model }}" class="card-img-top vehicle-img" />
           <div class="card-overlay">
-            <span class="badge bg-warning">{{ vehicle.price }}</span>
+            <span class="badge bg-warning">{{ vehicle.price_per_day }}</span>
           </div>
         </div>
 
         <!-- Card Body -->
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title fw-bold">{{ vehicle.name }}</h5>
-          <p class="card-text text-muted small flex-grow-1">{{ vehicle.description }}</p>
+          <h5 class="card-title fw-bold float-right"><span class="card-tags">Status:  </span>{{ vehicle.status }}</h5>
+          <h5 class="card-title fw-bold"><span class="card-tags">Model:  </span>{{ vehicle.model }}</h5>
+          
+          <!-- <p class="card-text text-muted small flex-grow-1">{{ vehicle.description }}</p> -->
 
           <!-- Specs -->
-          <div class="vehicle-specs mb-3">
-            <span class="badge bg-light text-dark me-2" *ngFor="let spec of vehicle.specs">
-              {{ spec }}
+          <!-- <div class="vehicle-specs mb-3">
+           <span class="badge bg-light text-dark me-2" *ngFor="let spec of vehicle.specs">
+              {{ vehicle.type }}
             </span>
-          </div>
+          </div> -->
 
           <!-- Rating -->
           <!-- <div class="vehicle-rating mb-3">
